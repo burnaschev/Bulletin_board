@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'drf_yasg',
 
+    'users',
 ]
 
 MIDDLEWARE = [
@@ -137,3 +138,5 @@ CSRF_TRUSTED_ORIGINS = [
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+AUTH_USER_MODEL = 'users.User'
