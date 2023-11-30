@@ -7,4 +7,4 @@ class AdSerializers(serializers.ModelSerializer):
 
     class Meta:
         model = Ad
-        field = '__all__'
+        fields = '__all__'

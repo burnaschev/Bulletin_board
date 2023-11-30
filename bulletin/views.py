@@ -23,7 +23,9 @@ class AdRetrieveAPIView(generics.RetrieveAPIView):
 
 class AdDestroyAPIView(generics.DestroyAPIView):
     serializer_class = AdSerializers
+    queryset = Ad.objects.all()
 
 
 class AdUpdateAPIView(generics.UpdateAPIView):
     serializer_class = AdSerializers
+    queryset = Ad.objects.all()

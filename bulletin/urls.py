@@ -1,6 +1,9 @@
 from django.urls import path
 
+from bulletin.apps import BulletinConfig
 from bulletin.views import AdListAPIView, AdCreateAPIView, AdRetrieveAPIView, AdUpdateAPIView, AdDestroyAPIView
+
+app_name = BulletinConfig.name
 
 urlpatterns = [
     path('', AdListAPIView.as_view(), name='ad-list'),
