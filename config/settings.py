@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'drf_yasg',
     'rest_framework_simplejwt',
     'django_filters',
+    'djoser',
 
     'users',
     'bulletin',
@@ -167,3 +168,10 @@ EMAIL_PORT = 465
 EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
 EMAIL_USE_SSL = True
+
+DJOSER = {
+    'SERIALIZERS': {
+        'user_create': 'users.serializers.UserSerializers'
+    },
+    'LOGIN_FIELD': 'email'
+}
