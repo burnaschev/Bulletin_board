@@ -11,19 +11,24 @@ class UserRoles(models.TextChoices):
 
 
 class UserManager(BaseUserManager):
-    def create_user(self, email, first_name, last_name, phone, password=None, **extra_fields):
+    """
+    функция создания пользователя — в нее мы передаем обязательные поля
+    """
+
+    def create_user(self, email, first_name, last_name, phone, password=None):
         if not email:
             raise ValueError('Users must have an email address')
-        email = self.normalize_email(email)
         user = self.model(
-            email=email,
+            email=self.normalize_email(email),
             first_name=first_name,
             last_name=last_name,
             phone=phone,
-            **extra_fields
+            role=UserRoles.USER
         )
+        user.is_active = True
         user.set_password(password)
         user.save(using=self._db)
+
         return user
 
     def create_superuser(self, email, first_name, last_name, phone, password=None, **extra_fields):
@@ -33,9 +38,10 @@ class UserManager(BaseUserManager):
             last_name=last_name,
             phone=phone,
             password=password,
-            role=UserRoles.ADMIN,
-            **extra_fields
+
         )
+
+        user.role = UserRoles.ADMIN
         user.is_staff = True
         user.is_superuser = True
         user.save(using=self._db)
@@ -55,9 +61,7 @@ class User(AbstractUser):
     image = models.ImageField(upload_to='users_img/', verbose_name='аватар', **NULLABLE)
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = []
-
-    objects = UserManager()
+    REQUIRED_FIELDS = ['first_name', 'last_name', 'phone', "role"]
 
     @property
     def is_admin(self):
@@ -66,3 +70,5 @@ class User(AbstractUser):
     @property
     def is_user(self):
         return self.role == UserRoles.USER
+
+    objects = UserManager()
