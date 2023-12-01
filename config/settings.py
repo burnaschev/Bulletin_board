@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'drf_yasg',
     'rest_framework_simplejwt',
     'django_filters',
+    'djoser',
 
     'users',
     'bulletin',
@@ -167,3 +168,15 @@ EMAIL_PORT = 465
 EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
 EMAIL_USE_SSL = True
+# DEFAULT_FROM_EMAIL = os.getenv('EMAIL_HOST_USER')
+
+DJOSER = {
+    'PASSWORD_RESET_CONFIRM_URL': '#/password/reset/confirm/{uid}/{token}',
+    'USERNAME_RESET_CONFIRM_URL': '#/username/reset/confirm/{uid}/{token}',
+    'ACTIVATION_URL': '#/activate/{uid}/{token}',
+    'SEND_ACTIVATION_EMAIL': True,
+    'SERIALIZERS': {
+        'user_create': 'users.serializers.UserSerializers'
+    },
+    'LOGIN_FIELD': 'email',
+}
