@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'rest_framework',
+    'django_celery_beat',
     'corsheaders',
     'drf_yasg',
     'rest_framework_simplejwt',
@@ -90,7 +91,8 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': os.getenv('BASE_NAME'),
         'USER': os.getenv('BASE_USER'),
-        'PASSWORD': os.getenv('BASE_PASSWORD')
+        'PASSWORD': os.getenv('BASE_PASSWORD'),
+        "HOST": "db"
     }
 }
 
@@ -181,4 +183,17 @@ DJOSER = {
         'user_create': 'users.serializers.UserSerializers'
     },
     'LOGIN_FIELD': 'email',
+}
+
+CELERY_BROKER_URL = 'redis://redis:6379'
+CELERY_RESULT_BACKEND = 'redis://redis:6379'
+CELERY_TIMEZONE = "Europe/Moscow"
+CELERY_TASK_TRACK_STARTED = True
+CELERY_TASK_TIME_LIMIT = 30 * 60
+
+CELERY_BEAT_SCHEDULE = {
+    'task-name': {
+        'task': 'users.tasks.send_welcome_email',
+        'schedule': timedelta(minutes=3),
+    },
 }
