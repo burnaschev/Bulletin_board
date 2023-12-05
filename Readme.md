@@ -18,7 +18,6 @@
 - Фреймворк Django Rest Framework
 - Djoser
 - База данных PostgreSQL
-- Celery
 - Язык программирования Python
 - Git
 - Docker
@@ -55,11 +54,6 @@ python manage.py runserver
 
 После чего вы сможете получить доступ к API по адресу `http://localhost:8000/`.
 
-
-### Запуск Celery
-
-- celery -A config worker -l INFO
-- celery -A config beat -l INFO
 
 ## Docker
 
