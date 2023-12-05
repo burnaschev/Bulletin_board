@@ -33,19 +33,6 @@ services:
       timeout: 5s
       retries: 5
 
-  redis:
-    image: redis:alpine
-
-  celery:
-    build: .
-    tty: true
-    command: celery -A config worker --beat --loglevel=info
-    volumes:
-      - .:/code
-    depends_on:
-      - web
-      - redis
-
 
 
 volumes:

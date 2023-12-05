@@ -41,7 +41,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'rest_framework',
-    'django_celery_beat',
     'corsheaders',
     'drf_yasg',
     'rest_framework_simplejwt',
@@ -183,17 +182,4 @@ DJOSER = {
         'user_create': 'users.serializers.UserSerializers'
     },
     'LOGIN_FIELD': 'email',
-}
-
-CELERY_BROKER_URL = f'redis://{os.getenv("CELERY_BROKER_URL")}:6379'
-CELERY_RESULT_BACKEND = f'redis://{os.getenv("CELERY_RESULT_BACKEND")}:6379'
-CELERY_TIMEZONE = "Europe/Moscow"
-CELERY_TASK_TRACK_STARTED = True
-CELERY_TASK_TIME_LIMIT = 30 * 60
-
-CELERY_BEAT_SCHEDULE = {
-    'task-name': {
-        'task': 'users.tasks.send_welcome_email',
-        'schedule': timedelta(minutes=3),
-    },
 }
