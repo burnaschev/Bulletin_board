@@ -23,7 +23,6 @@ from drf_yasg.views import get_schema_view
 from rest_framework import permissions
 from django.urls import include
 
-from users.urls import users_router
 
 schema_view = get_schema_view(
     openapi.Info(
