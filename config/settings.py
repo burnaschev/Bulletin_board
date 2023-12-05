@@ -92,7 +92,7 @@ DATABASES = {
         'NAME': os.getenv('BASE_NAME'),
         'USER': os.getenv('BASE_USER'),
         'PASSWORD': os.getenv('BASE_PASSWORD'),
-        "HOST": "db"
+        "HOST": os.getenv('BASE_HOST')
     }
 }
 
@@ -165,8 +165,8 @@ SIMPLE_JWT = {
     'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
 }
 
-EMAIL_HOST = 'smtp.yandex.ru'
-EMAIL_PORT = 465
+EMAIL_HOST = os.getenv("EMAIL_HOST")
+EMAIL_PORT = os.getenv("EMAIL_PORT")
 EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
 EMAIL_USE_SSL = True
@@ -185,8 +185,8 @@ DJOSER = {
     'LOGIN_FIELD': 'email',
 }
 
-CELERY_BROKER_URL = 'redis://redis:6379'
-CELERY_RESULT_BACKEND = 'redis://redis:6379'
+CELERY_BROKER_URL = f'redis://{os.getenv("CELERY_BROKER_URL")}:6379'
+CELERY_RESULT_BACKEND = f'redis://{os.getenv("CELERY_RESULT_BACKEND")}:6379'
 CELERY_TIMEZONE = "Europe/Moscow"
 CELERY_TASK_TRACK_STARTED = True
 CELERY_TASK_TIME_LIMIT = 30 * 60

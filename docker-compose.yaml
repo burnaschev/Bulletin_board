@@ -6,7 +6,8 @@ services:
       - .:/code
     tty: true
     command:
-      sh -c "python3 manage.py migrate &&
+      sh -c "python3 manage.py makemigrations && 
+      python3 manage.py migrate &&
       python3 manage.py runserver 0.0.0.0:8080"
     ports:
       - "8080:8080"
@@ -38,7 +39,7 @@ services:
   celery:
     build: .
     tty: true
-    command: celery -A config worker -l INFO
+    command: celery -A config worker --beat --loglevel=info
     volumes:
       - .:/code
     depends_on:

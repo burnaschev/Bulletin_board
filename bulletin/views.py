@@ -1,5 +1,4 @@
 from rest_framework import generics, viewsets
-from rest_framework.permissions import AllowAny
 from bulletin.models import Ad, Feedback
 from bulletin.paginators import AdPaginator
 from bulletin.permission import IsUser, IsAdmin
