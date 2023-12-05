@@ -11,9 +11,6 @@ class UserRoles(models.TextChoices):
 
 
 class UserManager(BaseUserManager):
-    """
-    функция создания пользователя — в нее мы передаем обязательные поля
-    """
 
     def create_user(self, email, first_name, last_name, phone, password=None):
         if not email:
